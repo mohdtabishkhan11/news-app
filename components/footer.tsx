@@ -1,4 +1,5 @@
 "use client"
+import {Heart} from "lucide-react"
 export const Footer = () => {
     return (
         <footer className="py-6 md:px-8 md:py-0 w-full bg-black mt-auto ">
@@ -7,9 +8,9 @@ export const Footer = () => {
                 <p className="text-center text-sm leading-loose text-white md:text-left">
                     © {new Date().getFullYear()} News Dashboard. All rights reserved.
                 </p>
-                <p className="text-center text-sm leading-loose text-white md:text-left">
-                   Created By Mohd.Tabish Khan
-                </p>
+                <a href="https://github.com/mohdtabishkhan11"><p className="text-center text-sm leading-loose text-white md:text-left flex gap-2">
+                   Created By Mohd.Tabish Khan <Heart className="text-red-500 fill-red-500" />
+                </p></a>
                 <nav className="flex items-center space-x-4 text-sm">
                     <a href="#" className="text-white hover:underline">
                         About
