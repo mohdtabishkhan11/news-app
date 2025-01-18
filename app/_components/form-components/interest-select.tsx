@@ -31,6 +31,7 @@ export const InterestsSelect = ({ control, errors, disabled }: InterestsSelectPr
                             {categories.map((category) => (
                                 <div key={category.id} className="flex items-center space-x-2">
                                     <Checkbox
+                                        className="inte"
                                         id={category.id}
                                         checked={field.value?.includes(category.id)}
                                         onCheckedChange={(checked) => {

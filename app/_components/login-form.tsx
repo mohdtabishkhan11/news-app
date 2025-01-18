@@ -21,6 +21,7 @@ import { CountrySelect } from "./form-components/country-select";
 import { InterestsSelect } from "./form-components/interest-select";
 import { LoaderCircle } from "lucide-react";
 
+const bgvideo = "/video_bg.mp4";
 export const LoginForm = () => {
     const [error, setError] = useState<null | string>(null);
     const {
@@ -60,14 +61,22 @@ export const LoginForm = () => {
     };
 
     return (
-        <Card className="w-full max-w-md">
+        <Card className="login-card w-full max-w-md">
+
+
             <CardHeader>
+                <div className="fullscreen-bg">
+                    <video loop muted autoPlay className="fullscreen-bg__video">
+                        <source src={bgvideo} type="video/mp4"></source>
+                    </video>
+                </div>
+
                 <CardTitle className="text-2xl">Login for News Recommendations</CardTitle>
                 <CardDescription>
                     Please fill in your details to get personalized news.
                 </CardDescription>
             </CardHeader>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="form-log">
                 {error && <p className="text-sm text-destructive text-center">{error}</p>}
 
                 <CardContent className="space-y-4">
@@ -116,7 +125,7 @@ export const LoginForm = () => {
                             setError(null);
                             reset();
                         }}
-                        variant={"outline"}
+                        // variant={"outline"}
                         type="button"
                         className="w-full"
                     >
