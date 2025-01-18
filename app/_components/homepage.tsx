@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Bell, Menu, ChevronLeft, ChevronRight, UserPlus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Footer } from "@/components/footer";
+
 
 export const NewsHomepage = () => {
-const newsabout = "/news_about.jpg";
+    const newsabout = "/news_about.jpg";
 
 
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -54,26 +56,26 @@ const newsabout = "/news_about.jpg";
         }
     ];
 
-    const topStories = [
-        {
-            id: 4,
-            title: "Space Exploration: New Discoveries on Mars",
-            category: "Science",
-            readTime: "3 min read",
-        },
-        {
-            id: 5,
-            title: "Tech Giants Announce Collaborative AI Ethics Initiative",
-            category: "Technology",
-            readTime: "4 min read",
-        },
-        {
-            id: 6,
-            title: "Global Climate Summit: Key Takeaways",
-            category: "Environment",
-            readTime: "5 min read",
-        }
-    ];
+    // const topStories = [
+    //     {
+    //         id: 4,
+    //         title: "Space Exploration: New Discoveries on Mars",
+    //         category: "Science",
+    //         readTime: "3 min read",
+    //     },
+    //     {
+    //         id: 5,
+    //         title: "Tech Giants Announce Collaborative AI Ethics Initiative",
+    //         category: "Technology",
+    //         readTime: "4 min read",
+    //     },
+    //     {
+    //         id: 6,
+    //         title: "Global Climate Summit: Key Takeaways",
+    //         category: "Environment",
+    //         readTime: "5 min read",
+    //     }
+    // ];
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -208,7 +210,7 @@ const newsabout = "/news_about.jpg";
                 </section>
 
                 {/* Top Stories Section */}
-                <section>
+                {/* <section>
                     <h2 className="text-2xl font-bold mb-6">Top Stories</h2>
                     <div className="grid grid-cols-1 gap-4">
                         {topStories.map((story) => (
@@ -223,8 +225,10 @@ const newsabout = "/news_about.jpg";
                             </Card>
                         ))}
                     </div>
-                </section>
+                </section> */}
             </main>
+            <Footer />
+
         </div>
     );
 };
