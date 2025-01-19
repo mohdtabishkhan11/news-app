@@ -29,9 +29,17 @@ export interface IArticle {
     author?: string;
 }
 
-export interface LoginFormData {
+export interface SignUpFormData {
     name: string;
     age: number;
     country: string;
     interests: string[];
+}
+
+export interface User {
+    _id: string;
+    name: string;
+    email: string;
+    password: string;
+    age: string;
 }

@@ -1,5 +1,4 @@
 import { InterestCategory } from "./types";
-
 export const categories: { id: InterestCategory; label: string }[] = [
     {
         id: "general",
