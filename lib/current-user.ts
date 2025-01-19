@@ -3,10 +3,6 @@ import { verifyToken } from "./auth/session";
 import user from "@/models/user";
 import { dbConnect } from "./connect-db";
 
-export const currentUserId = async () => {
-    return (await cookies()).get("userId")?.value || "";
-};
-
 export async function getUser() {
     const sessionCookie = (await cookies()).get("session");
     if (!sessionCookie || !sessionCookie.value) {

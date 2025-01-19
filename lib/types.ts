@@ -7,15 +7,6 @@ export type InterestCategory =
     | "sports"
     | "technology";
 
-export interface IUser {
-    userId: string;
-    name: string;
-    country: string;
-    interests: string[];
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
 export interface IArticle {
     title?: string;
     url?: string;

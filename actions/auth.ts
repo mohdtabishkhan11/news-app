@@ -2,16 +2,17 @@
 import { validateAction } from "@/lib/auth/middleware";
 import { comparePasswords, hashPassword, setSession } from "@/lib/auth/session";
 import { dbConnect } from "@/lib/connect-db";
+import { getUser } from "@/lib/current-user";
 import { deleteSession } from "@/lib/session";
 import { User } from "@/lib/types";
 import user from "@/models/user";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-export async function logout() {
-    deleteSession();
-    redirect("/");
-}
+export const signOut = async () => {
+    (await cookies()).delete("session");
+};
 
 // Define signUpSchema
 const signUpSchema = z.object({

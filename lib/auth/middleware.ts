@@ -3,7 +3,7 @@ import { z } from "zod";
 export type ActionState = {
     error?: string;
     success?: string;
-    [key: string]: any; // This allows for additional properties
+    [key: string]: any;
 };
 
 type ValidateActionFunc<T extends z.ZodType<any, any>, U> = (
