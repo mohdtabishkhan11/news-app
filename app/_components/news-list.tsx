@@ -10,19 +10,21 @@ import { Button } from "@/components/ui/button";
 import { initialData } from "@/lib/data";
 import { IArticle } from "@/lib/types";
 import { LoaderIcon } from "lucide-react";
+import { cn, isInSequence } from "@/lib/utils";
+import { InterestSelection } from "./select-interest";
 
 const fallbackImage = "/brknews.jpg";
 const ITEMS_PER_PAGE = 8;
 
-function NewsItem({ article }: { article: IArticle }) {
+function NewsItem({ article, styles }: { article: IArticle; styles: string }) {
     const [imageError, setImageError] = useState(false);
 
     return (
-        <Card className="flex flex-col">
-            <CardHeader>
-                <CardTitle className="text-lg line-clamp-2">{article.title}</CardTitle>
-            </CardHeader>
-            <div className="relative aspect-ratio-box h-[250px]">
+        <Card className={cn("flex flex-col shadow-lg overflow-hidden", styles)}>
+            {/* <CardHeader> */}
+            {/* <CardTitle className="text-lg line-clamp-2">{article.title}</CardTitle> */}
+            {/* </CardHeader> */}
+            <div className="relative grow">
                 {article.image ? (
                     <Image
                         src={imageError ? fallbackImage : article.image}
@@ -44,7 +46,7 @@ function NewsItem({ article }: { article: IArticle }) {
                     />
                 )}
             </div>
-            <CardContent className="py-5 mt-auto">
+            {/* <CardContent className="py-5 mt-auto">
                 <p className="text-sm text-gray-600 mb-2 line-clamp-2">{article.description}</p>
                 <div className="flex flex-wrap gap-2 mb-2">
                     <Badge
@@ -58,13 +60,22 @@ function NewsItem({ article }: { article: IArticle }) {
                 <p className="text-xs text-gray-500">
                     Published: {new Date(article.published_at || "").toLocaleDateString()}
                 </p>
-            </CardContent>
-            <CardFooter>
-                <Button asChild className="w-full">
+            </CardContent> */}
+            <CardFooter className="text-ellipsis py-4 block space-y-1">
+                <h2 className="text-lg font-medium truncate">{article.title}</h2>
+                <p className="block text-base text-neutral-600 truncate">{article.description}</p>
+                {/* <Button asChild className="w-full">
                     <a href={article.url} target="_blank" rel="noopener noreferrer">
                         Read More
                     </a>
-                </Button>
+                </Button> */}
+                <Badge
+                    key={article.category}
+                    variant="secondary"
+                    className="shadow-md capitalize mt-3"
+                >
+                    {article.source}
+                </Badge>
             </CardFooter>
         </Card>
     );
@@ -74,32 +85,7 @@ export function NewsList({ query }: { query: string }) {
     const [news, setNews] = useState<IArticle[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState(1);
-
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const res = await fetch(query);
-                const data = await res.json();
-
-                if (data?.data) {
-                    setNews(data?.data);
-                    return;
-                }
-
-                setNews(initialData.data as IArticle[]);
-            } catch (error) {
-                console.log("Error fetching news", error);
-                setNews([]);
-            } finally {
-                setLoading(false);
-            }
-        })();
-    }, [query]);
-
-    if (loading) {
-        return <LoaderIcon className="animate-spin size-8 absolute top-1/2 left-1/2" />;
-    }
+    const [selectedInterest, setSelectedInterest] = useState<string>("general");
 
     const totalPages = Math.ceil(news.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -108,7 +94,7 @@ export function NewsList({ query }: { query: string }) {
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const getPageNumbers = () => {
@@ -122,34 +108,84 @@ export function NewsList({ query }: { query: string }) {
                 for (let i = 1; i <= 5; i++) {
                     pageNumbers.push(i);
                 }
-                pageNumbers.push('...');
+                pageNumbers.push("...");
                 pageNumbers.push(totalPages);
             } else if (currentPage >= totalPages - 2) {
                 pageNumbers.push(1);
-                pageNumbers.push('...');
+                pageNumbers.push("...");
                 for (let i = totalPages - 4; i <= totalPages; i++) {
                     pageNumbers.push(i);
                 }
             } else {
                 pageNumbers.push(1);
-                pageNumbers.push('...');
+                pageNumbers.push("...");
                 for (let i = currentPage - 1; i <= currentPage + 1; i++) {
                     pageNumbers.push(i);
                 }
-                pageNumbers.push('...');
+                pageNumbers.push("...");
                 pageNumbers.push(totalPages);
             }
         }
         return pageNumbers;
     };
 
+    const onChange = (id: string) => {
+        setSelectedInterest(id);
+    };
+
+    useEffect(() => {
+        if (!query) return;
+        // you just have to add  the  selectedInterest
+        // in apiQuery as search params
+        // Like https:/apiquery/&category=selectedInteredt
+
+        (async () => {
+            setLoading(true);
+            try {
+                const res = await fetch(`${query}&categories=${selectedInterest}&countries=in`);
+                const data = await res.json();
+
+                if (data?.data) {
+                    setNews(data.data);
+                    return;
+                }
+
+                setNews(initialData.data as IArticle[]);
+            } catch (error) {
+                console.log("Error fetching news", error);
+                setNews([]);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [query, selectedInterest]);
+
+    if (loading) {
+        return <LoaderIcon className="animate-spin size-8 absolute top-1/2 left-1/2" />;
+    }
+
     return (
         <div className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <InterestSelection selectedInterest={selectedInterest} onChange={onChange} />
+
+            <div
+                className="w-full max-w-3xl mx-auto 
+                        grid grid-cols-3 gap-4 
+                    "
+            >
                 {currentNews.length <= 0 ? (
                     <p className="text-center">No Articles found! Please try again later.</p>
                 ) : (
-                    currentNews.map((article, idx) => <NewsItem key={idx} article={article} />)
+                    currentNews.map((article, idx) => {
+                        let styles: string;
+                        if (isInSequence(idx + 1)) {
+                            styles = "col-span-3 md:col-span-3 h-[80vw] md:h-[381px]";
+                        } else {
+                            styles = "col-span-3 md:col-span-1 h-[80vw] md:h-[290px]";
+                        }
+
+                        return <NewsItem key={idx} styles={styles} article={article} />;
+                    })
                 )}
             </div>
 
@@ -157,7 +193,7 @@ export function NewsList({ query }: { query: string }) {
                 <nav aria-label="Page navigation" className="mt-8 flex justify-center">
                     <ul className="flex items-center gap-1 rounded-lg bg-white p-2 shadow-lg">
                         <li>
-                            <button 
+                            <button
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
                                 className="flex h-10 items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors
@@ -171,16 +207,20 @@ export function NewsList({ query }: { query: string }) {
                         {getPageNumbers().map((page, index) => (
                             <li key={index}>
                                 <button
-                                    onClick={() => page !== '...' ? handlePageChange(Number(page)) : null}
-                                    disabled={page === '...'}
+                                    onClick={() =>
+                                        page !== "..." ? handlePageChange(Number(page)) : null
+                                    }
+                                    disabled={page === "..."}
                                     className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium transition-colors
-                                              ${page === currentPage 
-                                                ? 'bg-gray-900 text-white hover:bg-gray-800' 
-                                                : 'hover:bg-gray-100'
+                                              ${
+                                                  page === currentPage
+                                                      ? "bg-gray-900 text-white hover:bg-gray-800"
+                                                      : "hover:bg-gray-100"
                                               }
-                                              ${page === '...' 
-                                                ? 'cursor-default hover:bg-transparent' 
-                                                : ''
+                                              ${
+                                                  page === "..."
+                                                      ? "cursor-default hover:bg-transparent"
+                                                      : ""
                                               }`}
                                 >
                                     {page}
@@ -189,7 +229,7 @@ export function NewsList({ query }: { query: string }) {
                         ))}
 
                         <li>
-                            <button 
+                            <button
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={currentPage === totalPages}
                                 className="flex h-10 items-center justify-center px-4 rounded-lg text-sm font-medium transition-colors
