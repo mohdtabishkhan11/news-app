@@ -12,12 +12,6 @@ export function InterestSelection({
 }) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    // const toggleInterest = (interest: string) => {
-    //     setSelectedInterests((prev) =>
-    //         prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest]
-    //     );
-    // };
-
     const scroll = (direction: "left" | "right") => {
         if (scrollContainerRef.current) {
             const scrollAmount = 200;
@@ -31,15 +25,6 @@ export function InterestSelection({
     return (
         <div className=" relative max-w-3xl mx-auto no-scrollbar">
             <div className="flex items-center">
-                {/* <Button
-                    variant="outline"
-                    size="icon"
-                    className="absolute left-2 z-10 shadow-xl"
-                    onClick={() => scroll("left")}
-                >
-                    <ChevronLeft className="h-4 w-4" />
-                    <span className="sr-only">Scroll left</span>
-                </Button> */}
                 <div className="w-full flex items-center gap-4 ">
                     <div
                         ref={scrollContainerRef}
@@ -60,15 +45,6 @@ export function InterestSelection({
                         ))}
                     </div>
                 </div>
-                {/* <Button
-                    variant="outline"
-                    size="icon"
-                    className="absolute right-2 z-10 shadow-xl "
-                    onClick={() => scroll("right")}
-                >
-                    <ChevronRight className="h-4 w-4" />
-                    <span className="sr-only">Scroll right</span>
-                </Button> */}
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ import { IArticle } from "@/lib/types";
 import { LoaderIcon } from "lucide-react";
 import { cn, isInSequence } from "@/lib/utils";
 import { InterestSelection } from "./select-interest";
+import { CountrySelection } from "./select-countries";
 
 const fallbackImage = "/brknews.jpg";
 const ITEMS_PER_PAGE = 8;
@@ -86,6 +87,9 @@ export function NewsList({ query }: { query: string }) {
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedInterest, setSelectedInterest] = useState<string>("general");
+    const [selectedCountry, setSelectedCountry] = useState<null | { code: string; name: string }>(
+        null
+    );
 
     const totalPages = Math.ceil(news.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -133,16 +137,27 @@ export function NewsList({ query }: { query: string }) {
         setSelectedInterest(id);
     };
 
+    const onCountryChange = (country: { code: string; name: string }) => {
+        // User wanted to deselect
+        if (country.code === selectedCountry?.code) {
+            console.log("ondeselect");
+            setSelectedCountry(null);
+            return;
+        }
+        setSelectedCountry(country);
+    };
+
     useEffect(() => {
         if (!query) return;
-        // you just have to add  the  selectedInterest
-        // in apiQuery as search params
-        // Like https:/apiquery/&category=selectedInteredt
 
         (async () => {
             setLoading(true);
             try {
-                const res = await fetch(`${query}&categories=${selectedInterest}&countries=in`);
+                const res = await fetch(
+                    `${query}&categories=${selectedInterest}&countries=${
+                        selectedCountry?.code || ""
+                    }`
+                );
                 const data = await res.json();
 
                 if (data?.data) {
@@ -158,7 +173,7 @@ export function NewsList({ query }: { query: string }) {
                 setLoading(false);
             }
         })();
-    }, [query, selectedInterest]);
+    }, [query, selectedInterest, selectedCountry]);
 
     if (loading) {
         return <LoaderIcon className="animate-spin size-8 absolute top-1/2 left-1/2" />;
@@ -166,6 +181,7 @@ export function NewsList({ query }: { query: string }) {
 
     return (
         <div className="space-y-6">
+            <CountrySelection selectedCountry={selectedCountry} onChange={onCountryChange} />
             <InterestSelection selectedInterest={selectedInterest} onChange={onChange} />
 
             <div
