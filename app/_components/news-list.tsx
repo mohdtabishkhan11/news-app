@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 import { initialData } from "@/lib/data";
 import { IArticle } from "@/lib/types";
@@ -22,9 +21,6 @@ function NewsItem({ article, styles }: { article: IArticle; styles: string }) {
 
     return (
         <Card className={cn("flex flex-col shadow-lg overflow-hidden", styles)}>
-            {/* <CardHeader> */}
-            {/* <CardTitle className="text-lg line-clamp-2">{article.title}</CardTitle> */}
-            {/* </CardHeader> */}
             <div className="relative grow">
                 {article.image ? (
                     <Image

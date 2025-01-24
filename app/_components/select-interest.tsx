@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { categories } from "@/lib/categories";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export function InterestSelection({
     selectedInterest,
@@ -11,16 +10,15 @@ export function InterestSelection({
     onChange: (id: string) => void;
 }) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-    const scroll = (direction: "left" | "right") => {
-        if (scrollContainerRef.current) {
-            const scrollAmount = 200;
-            scrollContainerRef.current.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth",
-            });
-        }
-    };
+    // const scroll = (direction: "left" | "right") => {
+    //     if (scrollContainerRef.current) {
+    //         const scrollAmount = 200;
+    //         scrollContainerRef.current.scrollBy({
+    //             left: direction === "left" ? -scrollAmount : scrollAmount,
+    //             behavior: "smooth",
+    //         });
+    //     }
+    // };
 
     return (
         <div className=" relative max-w-3xl mx-auto no-scrollbar">

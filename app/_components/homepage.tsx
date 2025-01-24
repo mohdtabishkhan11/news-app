@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Search, Bell, Menu, ChevronLeft, ChevronRight, UserPlus } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Footer } from "@/components/footer";
 import Image from "next/image";
 
 const newsabout = "/news_about.jpg";
@@ -27,10 +26,6 @@ const sliderData = [
     },
 ];
 
-// MC ILLOG KI IMAGE DAAL TB DIKHE GI
-// PUBLIC ME FOLDER BNA K SEPARATE KRDENA
-// IDHR './' SE START MT KRA, SIRF "/" (IMAGE URL PATH ME)
-
 const featuredNews = [
     {
         id: 1,
@@ -54,27 +49,6 @@ const featuredNews = [
         imageUrl: "/api/placeholder/800/400",
     },
 ];
-
-// const topStories = [
-//     {
-//         id: 4,
-//         title: "Space Exploration: New Discoveries on Mars",
-//         category: "Science",
-//         readTime: "3 min read",
-//     },
-//     {
-//         id: 5,
-//         title: "Tech Giants Announce Collaborative AI Ethics Initiative",
-//         category: "Technology",
-//         readTime: "4 min read",
-//     },
-//     {
-//         id: 6,
-//         title: "Global Climate Summit: Key Takeaways",
-//         category: "Environment",
-//         readTime: "5 min read",
-//     },
-// ];
 
 export const NewsHomepage = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -161,16 +135,17 @@ export const NewsHomepage = () => {
                             We believe in the power of informed citizens and strive to provide
                             comprehensive coverage across politics, technology, science, culture,
                             and more. Our commitment to journalistic excellence and integrity
-                            ensures that you stay well-informed in today's fast-paced world.
+                            ensures that you stay well-informed in today&apos;s fast-paced world.
                         </p>
                         <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Learn More
                         </button>
                     </div>
                     <div className="relative h-64">
-                        <img
+                        <Image
                             src={newsabout}
                             alt="NewsApp Team"
+                            fill
                             className="w-full h-full object-cover rounded-lg"
                         />
                     </div>

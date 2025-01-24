@@ -1,19 +1,15 @@
 "use client";
 
-import { useActionState, useState } from "react";
-
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SignUpFormData } from "@/lib/types";
 
 import { ActionState } from "@/lib/auth/middleware";
 import { signIn, signUp } from "@/actions/auth";
-import { AlertCircle, Globe, Loader2 } from "lucide-react";
+import { Globe, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 interface FormProps {

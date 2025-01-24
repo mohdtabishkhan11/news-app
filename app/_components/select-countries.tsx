@@ -19,16 +19,6 @@ export function CountrySelection({
         country.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const scroll = (direction: "left" | "right") => {
-        if (scrollContainerRef.current) {
-            const scrollAmount = 200;
-            scrollContainerRef.current.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth",
-            });
-        }
-    };
-
     return (
         <div className="max-w-3xl mx-auto space-y-4">
             <div className="relative">
