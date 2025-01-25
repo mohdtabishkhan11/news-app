@@ -182,24 +182,6 @@ export const NewsHomepage = () => {
                     ))}
                 </div>
             </section>
-
-            {/* Top Stories Section */}
-            {/* <section>
-                <h2 className="text-2xl font-bold mb-6">Top Stories</h2>
-                <div className="grid grid-cols-1 gap-4">
-                    {topStories.map((story) => (
-                        <Card key={story.id} className="hover:shadow-lg transition-shadow">
-                            <CardContent className="p-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-blue-600">{story.category}</span>
-                                    <span className="text-sm text-gray-500">{story.readTime}</span>
-                                </div>
-                                <h3 className="font-semibold text-lg">{story.title}</h3>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-            </section> */}
         </main>
     );
 };
