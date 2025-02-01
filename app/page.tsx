@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <>
             <header className="flex items-center w-full justify-between border-b border-neutral-200 p-4">
-                <h1 className="text-3xl font-bold">News App</h1>
+                <h1 className="text-3xl font-bold">NewsApp</h1>
 
                 <div className="space-x-2 w-fit">
                     <Link href={"/sign-up"}>

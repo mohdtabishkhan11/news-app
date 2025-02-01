@@ -9,7 +9,8 @@ export const Footer = () => {
                     © {new Date().getFullYear()} News Dashboard. All rights reserved.
                 </p>
                 <a href="https://github.com/mohdtabishkhan11"><p className="text-center text-sm leading-loose text-white md:text-left flex gap-2">
-                   Created By Mohd.Tabish Khan <Heart className="text-red-500 fill-red-500" />
+                   Created By Mohd.Tabish Khan 
+                   {/* <Heart className="text-red-500 fill-red-500" /> */}
                 </p></a>
                 <nav className="flex items-center space-x-4 text-sm">
                     <a href="#" className="text-white hover:underline">

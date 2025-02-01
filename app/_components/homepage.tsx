@@ -153,19 +153,13 @@ export const NewsHomepage = () => {
             </section>
 
             {/* Featured News Section */}
-            <section className="mb-12">
+            {/* <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-6">Featured News</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {featuredNews.map((news) => (
                         <Card key={news.id} className="hover:shadow-lg transition-shadow">
                             <CardContent className="p-0">
-                                {/* <Image
-                                    src={"/IDHAR URL DALNA LINE NO.30 DEKH"}
-                                    alt={news.title}
-                                    height={48}
-                                    width={100}
-                                    className="w-full  object-cover"
-                                /> */}
+                                
                                 <div className="p-4">
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm text-blue-600">
@@ -181,25 +175,9 @@ export const NewsHomepage = () => {
                         </Card>
                     ))}
                 </div>
-            </section>
-
-            {/* Top Stories Section */}
-            {/* <section>
-                <h2 className="text-2xl font-bold mb-6">Top Stories</h2>
-                <div className="grid grid-cols-1 gap-4">
-                    {topStories.map((story) => (
-                        <Card key={story.id} className="hover:shadow-lg transition-shadow">
-                            <CardContent className="p-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-blue-600">{story.category}</span>
-                                    <span className="text-sm text-gray-500">{story.readTime}</span>
-                                </div>
-                                <h3 className="font-semibold text-lg">{story.title}</h3>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
             </section> */}
+
+            
         </main>
     );
 };
