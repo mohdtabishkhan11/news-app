@@ -1,5 +1,5 @@
 "use client"
-import {Heart} from "lucide-react"
+// import {Heart} from "lucide-react"
 export const Footer = () => {
     return (
         <footer className="py-6 md:px-8 md:py-0 w-full bg-black mt-auto ">

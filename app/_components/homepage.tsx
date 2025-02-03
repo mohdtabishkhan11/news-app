@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 const newsabout = "/news_about.jpg";
@@ -26,29 +25,29 @@ const sliderData = [
     },
 ];
 
-const featuredNews = [
-    {
-        id: 1,
-        title: "Major Scientific Breakthrough in Renewable Energy",
-        category: "Science",
-        readTime: "5 min read",
-        imageUrl: "/api/placeholder/800/400",
-    },
-    {
-        id: 2,
-        title: "Global Economic Summit Concludes with New Agreements",
-        category: "Business",
-        readTime: "4 min read",
-        imageUrl: "/api/placeholder/800/400",
-    },
-    {
-        id: 3,
-        title: "Revolutionary AI Model Makes Breakthrough in Healthcare",
-        category: "Technology",
-        readTime: "6 min read",
-        imageUrl: "/api/placeholder/800/400",
-    },
-];
+// const featuredNews = [
+//     {
+//         id: 1,
+//         title: "Major Scientific Breakthrough in Renewable Energy",
+//         category: "Science",
+//         readTime: "5 min read",
+//         imageUrl: "/api/placeholder/800/400",
+//     },
+//     {
+//         id: 2,
+//         title: "Global Economic Summit Concludes with New Agreements",
+//         category: "Business",
+//         readTime: "4 min read",
+//         imageUrl: "/api/placeholder/800/400",
+//     },
+//     {
+//         id: 3,
+//         title: "Revolutionary AI Model Makes Breakthrough in Healthcare",
+//         category: "Technology",
+//         readTime: "6 min read",
+//         imageUrl: "/api/placeholder/800/400",
+//     },
+// ];
 
 export const NewsHomepage = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
