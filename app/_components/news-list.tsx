@@ -12,6 +12,7 @@ import { LoaderIcon } from "lucide-react";
 import { cn, isInSequence } from "@/lib/utils";
 import { InterestSelection } from "./select-interest";
 import { CountrySelection } from "./select-countries";
+import Link from 'next/link';
 
 const fallbackImage = "/brknews.jpg";
 const ITEMS_PER_PAGE = 8;
@@ -20,6 +21,7 @@ function NewsItem({ article, styles }: { article: IArticle; styles: string }) {
     const [imageError, setImageError] = useState(false);
 
     return (
+<Link href={article.url ?? ""}>
         <Card className={cn("flex flex-col shadow-lg overflow-hidden", styles)}>
             <div className="relative grow">
                 {article.image ? (
@@ -75,6 +77,7 @@ function NewsItem({ article, styles }: { article: IArticle; styles: string }) {
                 </Badge>
             </CardFooter>
         </Card>
+</Link>
     );
 }
 
